@@ -1,0 +1,38 @@
+<configuration>
+	<include resource="me/andpay/ti/lnk/config/ti-lnk-logback.xml" />
+	<include resource="me/andpay/ti/daf/config/ti-daf-logback.xml" />
+
+	<if condition='isNull("LOG_DIR")'>
+		<then>
+			<if condition='isDefined("APP_HOME")'>
+				<then>
+					<property name="LOG_DIR" value="${APP_HOME}/log" />
+				</then>
+				<else>
+					<property name="LOG_DIR" value="log" />
+				</else>
+			</if>
+		</then>
+	</if>
+
+	<appender name="AC-WPN-MIG-LOG-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_DIR}/ac-wpn-migrate.log</file>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_DIR}/ac-wpn-migrate.%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<logger name="org.springframework" level="INFO" />
+	<logger name="org.hibernate" level="ERROR" />
+	<logger name="org.apache.commons.beanutils" level="ERROR" />
+
+	<root level="INFO">
+		<appender-ref ref="AC-WPN-MIG-LOG-FILE" />
+	</root>
+
+</configuration>

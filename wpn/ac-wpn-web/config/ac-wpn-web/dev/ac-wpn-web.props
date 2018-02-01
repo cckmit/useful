@@ -1,0 +1,33 @@
+# Ns
+nsHome=src/test/resources/ns
+
+# Lnk
+qserver-id2='/amqp/queue'
+ti-lnk-srv-lookup-file=${user.home}/.ti_config/lookup/ti-lnk-srv-lookup2
+
+ac-wpn-web.rpc-server.default.concurrent=5
+
+# db
+ac-wpn-web.jdbc.showSql=true
+
+# ac-wpn-web
+ac-wpn-web.webcontext=/wpnc
+ac-wpn-web.httpPort=9920
+ac-wpn-web.webRoot=src/main/webapp/app
+ac-wpn-web.freemarkerTemplateExceptionHandler=debug
+ac-wpn-web.resourceFileMiniFlag=true
+
+# can replace shiro permissions to yours
+# Samples:
+# security.shiro.filterDefinitions=/favicon.ico = anon, noSessionCreation\n\
+#				/css/** = anon, noSessionCreation\n\
+#				/img/** = anon, noSessionCreation\n\
+#				/js/** = anon, noSessionCreation\n\
+
+# can replace following properties to yours
+# Samples:
+ac-web.loginUrl=/login.fhtml
+ac-web.successUrl=/angularApp/index.fhtml
+
+#wx
+ac-wpn.weixin.domain=open.weixin.qq.com

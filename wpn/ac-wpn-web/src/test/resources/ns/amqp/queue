@@ -1,0 +1,5 @@
+host=dev-server
+virtualHost=/ti-lnk
+username=ti-lnk
+password=ti123
+channel-cache-size=10

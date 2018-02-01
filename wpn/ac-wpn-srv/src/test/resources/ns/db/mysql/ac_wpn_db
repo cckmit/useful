@@ -1,0 +1,7 @@
+url=jdbc:mysql://mysqlserver:3306/ac_cms_db?useUnicode=yes&characterEncoding=UTF-8&autoReconnect=true&useServerPrepStmts=true&useCursorFetch=true
+username=ac
+password=ac123
+maxActive=16
+maxIdle=16
+minIdle=1
+initialSize=1

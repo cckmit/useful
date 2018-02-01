@@ -1,0 +1,7 @@
+url=jdbc:mysql://dev-server:3306/sampledb?useUnicode=yes&characterEncoding=UTF-8&autoReconnect=true&useServerPrepStmts=true&useCursorFetch=true
+username=root
+password=
+maxActive=16
+maxIdle=16
+minIdle=1
+initialSize=1

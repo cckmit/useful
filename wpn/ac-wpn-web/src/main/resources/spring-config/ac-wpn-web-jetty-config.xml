@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:ti-cache="http://www.andpay.me/schema/ti/ti-cache"
+	xmlns:ti-lnk="http://www.andpay.me/schema/ti/ti-lnk"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.andpay.me/schema/ti/ti-lnk http://www.andpay.me/schema/ti/ti-lnk/ti-lnk-1.1.0.xsd
+		http://www.andpay.me/schema/ti/ti-cache http://www.andpay.me/schema/ti/ti-cache/ti-cache-1.0.0.xsd">
+
+	<context:annotation-config />
+
+	<aop:aspectj-autoproxy />
+	
+	<import resource="classpath:spring-config/ac-wpn-web-env-config.xml" />
+
+
+	<bean id="fileResourceHandler" class="me.andpay.ti.web2.jetty.MultiResourcesHandler">
+		<property name="directoriesListed" value="false" />
+		<property name="welcomeFiles">
+			<list>
+				<value>index.html</value>
+			</list>
+		</property>
+		<property name="resourceBases">
+			<list>
+				<value>${ac-wpn-web.webRoot}</value>				
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="webAppContextHandler" class="org.eclipse.jetty.webapp.WebAppContext">
+		<property name="contextPath" value="${ac-wpn-web.webcontext}" />
+		<property name="defaultsDescriptor"><null /></property>
+		<property name="descriptor" value="classpath:spring-config/web.xml" />
+		<property name="configurationClasses">
+			<list>
+				<value>me.andpay.ti.web2.jetty.WebXmlConfiguration</value>
+			</list>
+		</property>
+		<property name="handler"><ref local="fileResourceHandler" /></property>
+	</bean>
+
+	<bean id="jettyServer" class="org.eclipse.jetty.server.Server" destroy-method="stop" init-method="start">
+		<property name="connectors">
+			<list>
+				<bean id="Connector" class="org.eclipse.jetty.server.nio.SelectChannelConnector">
+					<property name="port" value="${ac-wpn-web.httpPort}" />
+				</bean>
+			</list>
+		</property>
+		<property name="handler">
+			<bean id="handlers" class="org.eclipse.jetty.server.handler.HandlerList">
+				<property name="handlers">
+					<list>
+						<ref local="webAppContextHandler" />
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+</beans>

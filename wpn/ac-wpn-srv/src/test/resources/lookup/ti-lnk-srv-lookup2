@@ -1,0 +1,3 @@
+ac-cif.srv=amqp://${qserver-id2}/ac-cif.srv-queue
+ac-ums.admin-srv=amqp://${qserver-id2}/ac-ums.admin-srv-queue
+ti-quartz.srv=amqp://${qserver-id2}/ti-quartz.srv-queue

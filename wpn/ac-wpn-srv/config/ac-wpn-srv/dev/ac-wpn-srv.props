@@ -1,0 +1,27 @@
+# Ns
+nsHome=src/test/resources/ns
+
+# Lnk
+qserver-id2='/amqp/queue'
+ti-lnk-srv-lookup-file=src/test/resources/lookup/ti-lnk-srv-lookup2
+
+ac-wpn.rpc-server.default.concurrent=5
+ac-wpn.rpc-server.wxauth.concurrent=5
+ac-wpn.rpc-server.wxmsg.concurrent=5
+ac-wpn.rpc-server.wxqrcode.concurrent=5
+ac-wpn.rpc-server.notify-receive.concurrent=10
+ac-wpn.rpc-server.config.concurrent=5
+# Event
+ti-event-lookup-file=src/test/resources/lookup/ti-event-bus-lookup
+dqserver-id='/amqp/queue'
+
+# db
+ac-wpn.jdbc.showSql=true
+#wx
+ac-wpn.weixin.domain=api.weixin.qq.com
+ac-wpn.wxtoken_redis_timeout=10
+
+#quartz
+ac-wpn.cronExpression=0 0 0/1 * * ?
+
+

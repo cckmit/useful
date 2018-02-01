@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:ti-lnk="http://www.andpay.me/schema/ti/ti-lnk"
+	xmlns:ti-cache="http://www.andpay.me/schema/ti/ti-cache" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:ti-event="http://www.andpay.me/schema/ti/ti-event"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd		
+		http://www.andpay.me/schema/ti/ti-lnk http://www.andpay.me/schema/ti/ti-lnk/ti-lnk-1.1.0.xsd
+		http://www.andpay.me/schema/ti/ti-cache http://www.andpay.me/schema/ti/ti-cache/ti-cache-1.1.0.xsd 
+		http://www.andpay.me/schema/ti/ti-event http://www.andpay.me/schema/ti/ti-event/ti-event-1.1.0.xsd">
+
+	<context:annotation-config />
+
+	<aop:aspectj-autoproxy />
+
+
+	<!--dao start -->
+	<bean id="ac-wpn.WxPublicNumberDao" class="me.andpay.ac.wpn.srv.dao.WxPublicNumberDao"/>
+	<bean id="ac-wpn.WxUserBindInfoDao" class="me.andpay.ac.wpn.srv.dao.WxBindUserDao"/>
+	<bean id="ac-wpn.WxPublicNumberUserDao" class="me.andpay.ac.wpn.srv.dao.WxPublicNumberUserDao"/>
+	<bean id="ac-wpn.MessageRecordDao" class="me.andpay.ac.wpn.srv.dao.MessageRecordDao"/>
+	<bean id="ac-wpn.WxTemlateMessageDao" class="me.andpay.ac.wpn.srv.dao.WxMessageTemplateDao"/>
+	<bean id="ac-wpn.QRCodeParamDao" class="me.andpay.ac.wpn.srv.dao.WeixinQRCodeDao"/>
+	<bean id="ac-wpn.WeixinNotifyInfoDao" class="me.andpay.ac.wpn.srv.dao.WeixinNotifyInfoDao"/>
+	<bean id="ac-wpn.WxBindCardHolderDao" class="me.andpay.ac.wpn.srv.dao.WxBindCardHolderDao"/>
+	<!--dao end -->
+</beans>

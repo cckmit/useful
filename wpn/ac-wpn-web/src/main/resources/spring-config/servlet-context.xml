@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xsi:schemaLocation="
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<context:annotation-config />
+	<aop:aspectj-autoproxy />
+	<mvc:annotation-driven/>
+	
+	<import resource="classpath:spring-config/ac-wpn-web-env-config.xml" />
+
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<value>text/plain;charset=UTF-8</value>
+						</list>
+					</property>
+				</bean>
+				<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver">
+		<property name="messageConverters">
+			<list>
+				<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<value>text/plain;charset=UTF-8</value>
+						</list>
+					</property>
+				</bean>
+				<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<bean class="me.andpay.ac.web.lib.spring.WebExceptionResolver"></bean>
+
+
+	<bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPaths">
+			<list>
+				<value>classpath:freemarker</value>
+			</list>
+		</property>
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="template_exception_handler">${ac-wpn-web.freemarkerTemplateExceptionHandler}</prop>
+			</props>
+		</property>		
+	</bean>
+
+	<bean id="viewResolver" class="me.andpay.ti.web2.spring.mvc.FreeMarkerViewResolver">
+		<property name="cache" value="true" />
+		<property name="suffix" value=".ftl" />
+		<property name="contentType" value="text/html; charset=UTF-8" />
+		<property name="resourceFileMiniFlag" value="${ac-wpn-web.resourceFileMiniFlag}" />
+		<property name="fileResourceBases">
+			<list>
+				<value>${ac-wpn-web.webRoot}</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- session拦截器和资源访问拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/**/js/**" />
+			<mvc:exclude-mapping path="/**/img/**" />
+			<mvc:exclude-mapping path="/**/css/**" />
+			<bean class="me.andpay.ac.web.lib.session.SecurityInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<import resource="classpath:spring-config/ac-wpn-web-controller-config.xml" />
+</beans>

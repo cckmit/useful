@@ -1,0 +1,82 @@
+Manifest-Version: 1.0
+Built-By: andpay
+Class-Path: ../lib/ac-wpn-inter-api-1.0.0-SNAPSHOT.jar ../lib/ti-lnk-a
+ pi-1.1.0-20170414.083504-97.jar ../lib/ac-wpn-api-1.0.0-SNAPSHOT.jar 
+ ../lib/poi-ooxml-3.11.jar ../lib/poi-ooxml-schemas-3.11.jar ../lib/xm
+ lbeans-2.6.0.jar ../lib/stax-api-1.0.1.jar ../lib/ti-base-1.0.0-20170
+ 414.082806-244.jar ../lib/ti-srv-redis-util-1.0.0-20160807.161139-18.
+ jar ../lib/javassist-3.21.0-GA.jar ../lib/ti-srv-util-1.0.0-20170414.
+ 082512-287.jar ../lib/commons-beanutils-1.8.3.jar ../lib/poi-3.8.jar 
+ ../lib/spring-batch-core-2.1.9.RELEASE.jar ../lib/spring-batch-infras
+ tructure-2.1.9.RELEASE.jar ../lib/xstream-1.3.jar ../lib/xpp3_min-1.1
+ .4c.jar ../lib/jettison-1.1.jar ../lib/lettuce-2.3.3.jar ../lib/netty
+ -3.6.6.Final.jar ../lib/guava-18.0.jar ../lib/bval-jsr303-0.5.jar ../
+ lib/bval-core-0.5.jar ../lib/commons-beanutils-core-1.8.3.jar ../lib/
+ commons-lang3-3.1.jar ../lib/httpmime-4.3.6.jar ../lib/httpclient-4.3
+ .6.jar ../lib/commons-logging-1.1.3.jar ../lib/commons-codec-1.6.jar 
+ ../lib/httpasyncclient-4.0-beta4-hacked.jar ../lib/httpcore-nio-4.3-b
+ eta2.jar ../lib/httpcore-4.3.3.jar ../lib/commons-net-3.1.jar ../lib/
+ zip4j-1.3.1.jar ../lib/itextpdf-5.2.0.jar ../lib/itext-asian-5.2.0.ja
+ r ../lib/simple-xml-2.6.8.jar ../lib/jetty-server-8.1.13.v20130916.ja
+ r ../lib/javax.servlet-3.0.0.v201112011016.jar ../lib/jetty-continuat
+ ion-8.1.13.v20130916.jar ../lib/jetty-http-8.1.13.v20130916.jar ../li
+ b/mt-cmbc-ma-sdk-client-1.0.0.jar ../lib/SADK-CMBC-3.1.0.8.jar ../lib
+ /ti-queue-1.0.0-20161107.061654-58.jar ../lib/amqp-client-3.5.7.jar .
+ ./lib/spring-rabbit-1.4.6.RELEASE.jar ../lib/spring-retry-1.1.2.RELEA
+ SE.jar ../lib/spring-messaging-4.1.7.RELEASE.jar ../lib/spring-amqp-1
+ .4.6.RELEASE.jar ../lib/jedis-2.8.0.jar ../lib/commons-pool2-2.3.jar 
+ ../lib/spring-context-3.2.16.RELEASE.jar ../lib/spring-aop-3.2.16.REL
+ EASE.jar ../lib/aopalliance-1.0.jar ../lib/spring-expression-3.2.16.R
+ ELEASE.jar ../lib/spring-aspects-3.2.16.RELEASE.jar ../lib/aspectjrt-
+ 1.7.4.jar ../lib/aspectjweaver-1.7.4.jar ../lib/log4j-over-slf4j-1.7.
+ 14.jar ../lib/logback-core-1.1.3.jar ../lib/logback-classic-1.1.3.jar
+  ../lib/janino-2.7.8.jar ../lib/commons-compiler-2.7.8.jar ../lib/jsr
+ 250-api-1.0.jar ../lib/ac-ums-api-1.0.2-SNAPSHOT.jar ../lib/hibernate
+ -jpa-2.0-api-1.0.1.Final.jar ../lib/validation-api-1.0.0.GA.jar ../li
+ b/ac-cif-api-1.0.0-SNAPSHOT.jar ../lib/ac-bams-api-1.0.0-20170314.141
+ 549-3.jar ../lib/spring-data-mongodb-1.5.6.RELEASE.jar ../lib/spring-
+ data-commons-1.8.6.RELEASE.jar ../lib/mongo-java-driver-2.12.5.jar ..
+ /lib/jcl-over-slf4j-1.7.12.jar ../lib/ti-daf-1.0.0-20170414.084034-14
+ 9.jar ../lib/spring-orm-3.2.16.RELEASE.jar ../lib/spring-beans-3.2.16
+ .RELEASE.jar ../lib/spring-core-3.2.16.RELEASE.jar ../lib/spring-jdbc
+ -3.2.16.RELEASE.jar ../lib/spring-tx-3.2.16.RELEASE.jar ../lib/hibern
+ ate-entitymanager-4.1.12.Final.jar ../lib/jboss-logging-3.1.0.GA.jar 
+ ../lib/jboss-transaction-api_1.1_spec-1.0.0.Final.jar ../lib/dom4j-1.
+ 6.1.jar ../lib/hibernate-core-4.1.12.Final.jar ../lib/antlr-2.7.7.jar
+  ../lib/hibernate-commons-annotations-4.0.1.Final.jar ../lib/jackson-
+ datatype-hibernate4-2.8.1.jar ../lib/cglib-3.2.0.jar ../lib/asm-5.0.3
+ .jar ../lib/ant-1.9.4.jar ../lib/ant-launcher-1.9.4.jar ../lib/common
+ s-jxpath-1.3.jar ../lib/mysql-connector-java-5.1.21.jar ../lib/tomcat
+ -jdbc-7.0.30.jar ../lib/tomcat-juli-7.0.30.jar ../lib/ti-cache-api-1.
+ 1.0-20160923.021420-22.jar ../lib/ti-dfs-client-1.0.0-20160317.041451
+ -92.jar ../lib/ti-dfs-api-1.0.0-20160317.041448-93.jar ../lib/slf4j-a
+ pi-1.6.6.jar ../lib/ti-lnk-spring-1.1.0-20170414.083541-74.jar ../lib
+ /snakeyaml-1.10-HACKED.jar ../lib/ti-lnk-rpc-1.1.0-20170414.083523-77
+ .jar ../lib/ti-lnk-inter-api-1.1.0-20170414.083507-96.jar ../lib/ti-l
+ nk-jmx-1.1.0-20170414.083521-31.jar ../lib/ti-lnk-protocol-1.1.0-2017
+ 0414.083509-96.jar ../lib/ti-lnk-transport-amqp-1.1.0-20170414.083513
+ -90.jar ../lib/ti-lnk-transport-wsock-common-1.1.0-20170414.083514-87
+ .jar ../lib/ti-lnk-transport-wsock-server-1.1.0-20170414.083515-89.ja
+ r ../lib/jetty-websocket-7.6.7.v20120910.jar ../lib/jetty-util-7.6.7.
+ v20120910.jar ../lib/jetty-io-7.6.7.v20120910.jar ../lib/ti-lnk-sessi
+ on-redis-1.1.0-20170414.083511-94.jar ../lib/commons-pool-1.6.jar ../
+ lib/ti-cache-spring-1.1.0-20160923.021423-14.jar ../lib/ti-cache-impl
+ -1.1.0-20160923.021422-17.jar ../lib/ti-cache-redis-1.1.0-20160923.02
+ 1423-15.jar ../lib/ti-srv-config-ctx-1.0.0-20170414.083242-106.jar ..
+ /lib/ti-seq-1.0.0-20170427.082843-64.jar ../lib/ti-util-1.1.0-2017033
+ 1.104211-25.jar ../lib/jackson-core-2.8.1.jar ../lib/jackson-databind
+ -2.8.1.jar ../lib/jackson-annotations-2.8.0.jar ../lib/jackson-datafo
+ rmat-smile-2.8.1.jar ../lib/ti-rule-lib-1.0.0-20170324.033850-40.jar 
+ ../lib/ti-load-1.0.3.jar ../lib/groovy-all-2.1.3.jar ../lib/json-path
+ -2.1.0.jar ../lib/json-smart-2.2.jar ../lib/accessors-smart-1.1.jar .
+ ./lib/ac-common-api-1.0.0-SNAPSHOT.jar ../lib/ti-quartz-api-1.0.0-201
+ 61201.141123-98.jar ../lib/quartz-2.1.6.jar ../lib/c3p0-0.9.1.1.jar .
+ ./lib/ti-mns-api-1.0.0-SNAPSHOT.jar ../lib/ac-const-1.0.0-SNAPSHOT.ja
+ r ../lib/ti-vault-api-1.0.0-20170413.123057-52.jar ../lib/ac-event-wp
+ n-1.0.0-20170413.134951-17.jar ../lib/ac-event-share-1.0.0-SNAPSHOT.j
+ ar ../lib/ti-event-1.1.0-20161102.035057-28.jar ../lib/ti-test-api-1.
+ 0.0-20160525.065054-4.jar
+Build-Jdk: 1.8.0_45
+Created-By: Maven Integration for Eclipse
+Main-Class: me.andpay.ac.wpn.srv.AcWpnServerMain
+

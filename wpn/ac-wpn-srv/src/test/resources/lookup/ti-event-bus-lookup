@@ -1,0 +1,12 @@
+(ac-las)\.(.*)=amqp://${dqserver-id},ti-event.ac-las-event-exchange
+(ac-ccis)\.(.*)=amqp://${dqserver-id},ti-event.ac-ccis-event-exchange
+(ac-ums)\.(.*)=amqp://${dqserver-id},ti-event.ac-ums-event-exchange
+(ti-graph-srv)\.(.*)=amqp://${dqserver-id},ti-event.ti-graph-event-exchange
+(ac-lrcs)\.(.*)=amqp://${dqserver-id},ti-event.ac-lrcs-event-exchange
+(ac-fc)\.(.*)=amqp://${dqserver-id},ti-event.ac-fc-event-exchange
+(ac-term)\.(.*)=amqp://${dqserver-id},ti-event.ac-term-event-exchange
+(ac-oss-cif)\.(.*)=amqp://${dqserver-id},ti-event.ac-oss-cif-event-exchange
+(ac-cif)\.(.*)=amqp://${dqserver-id},ti-event.ac-cif-event-exchange
+(ac-txn)\.(.*)=amqp://${dqserver-id},ti-event.ac-txn-event-exchange
+(ac-vas)\.(.*)=amqp://${dqserver-id},ti-event.ac-vas-event-exchange
+(ac-wpn)\.(.*)=amqp://${dqserver-id},ti-event.ac-wpn-event-exchange

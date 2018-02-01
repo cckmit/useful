@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:ti-lnk="http://www.andpay.me/schema/ti/ti-lnk"
+       xmlns:ti-cache="http://www.andpay.me/schema/ti/ti-cache" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:ti-event="http://www.andpay.me/schema/ti/ti-event" xmlns:ti-load="http://www.andpay.me/schema/ti/ti-load"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+		http://www.andpay.me/schema/ti/ti-lnk http://www.andpay.me/schema/ti/ti-lnk/ti-lnk-1.1.0.xsd
+		http://www.andpay.me/schema/ti/ti-cache http://www.andpay.me/schema/ti/ti-cache/ti-cache-1.1.0.xsd
+		http://www.andpay.me/schema/ti/ti-event http://www.andpay.me/schema/ti/ti-event/ti-event-1.1.0.xsd
+		http://www.andpay.me/schema/ti/ti-load http://www.andpay.me/schema/ti/ti-load/ti-load-1.0.0.xsd">
+
+	<context:annotation-config />
+
+	<aop:aspectj-autoproxy />
+
+	<import resource="classpath:spring-config/ac-wpn-srv-dao-config.xml" />
+	<import resource="classpath:spring-config/ti/seq/ti-seq-config.xml" />
+
+    <bean id="redisTemplate" class="me.andpay.ti.data.redis.DefaultRedisTemplate">
+		<property name="connectionFactory">
+			<ref bean="redisConnectionFactory" />
+		</property>
+	</bean>
+
+	<bean id="redisConnectionFactory" class="me.andpay.ti.data.redis.NsRedisConnectionFactory">
+		<property name="nsPath" value="/redis/server" />
+		<property name="nsRegistry">
+			<bean class="me.andpay.ti.config.ns.NsRegistryImpl">
+				<property name="nsHome" value="${nsHome}">
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="ac-wpn.DfsClient" class="me.andpay.ti.dfs.client.DfsClientImpl" />
+	
+
+	<bean id="ac-wpn.DictViewClient" class="me.andpay.ac.common.api.dict.DefaultDictViewClient">
+        <property name="systemId">
+            <util:constant static-field="me.andpay.ac.consts.SystemIds.AC_WPN"/>
+        </property>
+    </bean>
+
+
+	<!--service start -->
+	<bean id="ac-wpn.WeixinAuthService" class="me.andpay.ac.wpn.srv.service.WeixinAuthServiceImpl">
+		<property name="weixinDomain" value="${ac-wpn.weixin.domain}"/>
+		<property name="redisTimeout" value="${ac-wpn.wxtoken_redis_timeout}"/>
+ 	</bean>
+	<bean id="ac-wpn.WeixinUserBindService" class="me.andpay.ac.wpn.srv.service.WeixinUserBindServiceImpl"/>
+	<bean id="ac-wpn.WeixinPubicNumberService"  class="me.andpay.ac.wpn.srv.service.WeixinPubicNumberServiceImpl"/>
+	<bean id="ac-wpn.WeixinMessageService" class="me.andpay.ac.wpn.srv.wxmsg.WeixinMessageServiceImpl"/>
+
+	<bean id="ac-wpn.WeixinQRCodeService" class="me.andpay.ac.wpn.srv.qrcode.WeixinQRCodeServiceImpl">
+		<property name="weixinDomain" value="${ac-wpn.weixin.domain}"/>
+ 	</bean>
+	<bean id="ac-wpn.WeixinBaseService" class="me.andpay.ac.wpn.srv.service.WeixinBaseServiceImpl">
+		<property name="weixinDomain" value="${ac-wpn.weixin.domain}"/>
+	</bean>
+	<!--service end -->
+
+	<bean id="ac-wpn.QRCodeParamRepository" class="me.andpay.ac.wpn.srv.qrcode.WeixinQRCodeRepository"/>
+
+	<bean class="me.andpay.ti.util.SimpleHttpClient"/>
+
+
+	<bean id="ac-wpn.weixinServiceJob" class="me.andpay.ac.wpn.srv.job.WeixinServiceJob">
+		<property name="cronExpression" value="${ac-wpn.cronExpression}"/>
+	</bean>
+
+	<bean id="ac-wpn.WxTpMsgDeliveryStrategy" class="me.andpay.ti.mns.api.DeliveryStrategy">
+		<property name="deliveryLimit" value="3"/>
+		<property name="deliveryIntervalDelta" value="10000"/>
+		<property name="deliveryInterval" value="10000"/>
+	</bean>
+
+	<bean id="ac-wpn.WeixinNotifyReceiverService" class="me.andpay.ac.wpn.srv.notify.WeixinNotifyReceiverServiceImpl"/>
+
+	<bean id="ac-wpn.NotifyQueueEventHandler" class="me.andpay.ac.wpn.srv.notify.queue.NotifyQueueEventHandler">
+        <property name="processores">
+            <map>
+                <entry key="event_subscribe" value-ref="ac-wpn.WxQrCodeSubscribeProcessor"></entry>
+                <entry key="event_SCAN" value-ref="ac-wpn.WxQrCodeSubscribeProcessor"></entry>
+
+            </map>
+        </property>
+    </bean>
+
+
+	<!-- 卡号数据令牌化客户端 -->
+	<bean id="ac-wpn.CardNoTokenClient" class="me.andpay.ti.vault.client.SimpleTokenClient">
+		<property name="dataScope" value="0" />
+		<property name="dataType" value="00" />
+	</bean>
+
+	<bean id="ac-wpn.WeiXinMsgHandler" class="me.andpay.ac.wpn.srv.notify.WeiXinMsgHandler">
+		<property name="synchProcessores">
+			<map>
+				<entry key="event_subscribe" value-ref="ac-wpn.WxQrCodeSubscribeProcessor" ></entry>
+				<entry key="event_SCAN" value-ref="ac-wpn.WxQrCodeSubscribeProcessor" ></entry>
+			</map>
+		</property>
+	</bean>
+
+
+
+	<!--微信通知队列-->
+	<bean id="ac-wpn-srv.weixin-notify.AmqpQueue" class="me.andpay.ti.queue.amqp.AmqpQueue">
+		<property name="qserverId" value="${qserver-id2}"/>
+		<property name="queueName" value="ac-wpn-srv.weixin-notify-queue"/>
+		<property name="messageConvertor">
+			<bean class="me.andpay.ac.wpn.srv.notify.queue.NotifyContextConvertor"/>
+		</property>
+	</bean>
+
+    <bean id="ac-wpn.WxQrCodeSubscribeProcessor" class="me.andpay.ac.wpn.srv.notify.processor.WxQrCodeSubscribeProcessor">
+		<property name="sceneQrCodeProcessors">
+			<map>
+				<entry key="01" value-ref="ac-wpn.TxnVoucherSceneProcessor"></entry>
+				<entry key="02" value-ref="ac-wpn.BindPartySceneProcessor"></entry>
+			</map>
+		</property>
+ 	</bean>
+	<bean id="ac-wpn.BindPartySceneProcessor" class="me.andpay.ac.wpn.srv.notify.scene.BindPartySceneProcessor"/>
+    <bean id="ac-wpn.TxnVoucherSceneProcessor" class="me.andpay.ac.wpn.srv.notify.scene.TxnVoucherSceneProcessor"/>
+
+</beans>

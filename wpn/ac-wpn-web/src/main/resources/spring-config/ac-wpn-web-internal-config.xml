@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:ti-lnk="http://www.andpay.me/schema/ti/ti-lnk" xmlns:util="http://www.springframework.org/schema/util"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.andpay.me/schema/ti/ti-lnk http://www.andpay.me/schema/ti/ti-lnk/ti-lnk-1.1.0.xsd
+	    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<context:annotation-config />
+	<context:annotation-config />
+	
+	<import resource="classpath:spring-config/ac-wpn-web-env-config.xml"/>
+	
+	<ti-lnk:rpc id="ac-wpn-web.Rpc" lookup-file="${ti-lnk-srv-lookup-file}">
+		<ti-lnk:transport-amqp-server qserver-id="'/amqp/queue'" />
+	</ti-lnk:rpc>
+	
+	<bean id="redisTemplate" class="me.andpay.ti.data.redis.DefaultRedisTemplate">
+		<property name="connectionFactory">
+			<ref bean="redisConnectionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="redisConnectionFactory" class="me.andpay.ti.data.redis.NsRedisConnectionFactory">
+		<property name="nsPath" value="/redis/server" />
+		<property name="nsRegistry">
+			<bean class="me.andpay.ti.config.ns.NsRegistryImpl">
+				<property name="nsHome" value="${nsHome}">
+				</property>
+			</bean>			 
+		</property>
+	</bean>
+
+	<bean id="ac-wpn.defaultCookieSerializer" class="org.springframework.session.web.http.DefaultCookieSerializer">
+		<property name="cookiePath" value="/"/>
+	</bean>
+
+	<bean class="org.springframework.session.web.http.CookieHttpSessionStrategy">
+		<property name="cookieSerializer" ref="ac-wpn.defaultCookieSerializer"/>
+	</bean>
+
+	<bean id="ac-wpn-web.DictViewClient" class="me.andpay.ac.common.api.dict.DefaultDictViewClient">
+		<property name="systemId">
+			<util:constant static-field="me.andpay.ac.consts.SystemIds.AC_WPN_WEB" />
+		</property>
+	</bean>
+
+	<!-- 信息资源服务 -->
+	<bean id="ac-wpn-web.MessageResourceService" class="me.andpay.ac.web.lib.base.resource.MessageResourceServiceImpl">
+		<property name="dictViewClient" ref="ac-wpn-web.DictViewClient" />
+	</bean>
+
+	<bean id="ac-wpn-web.SessionAuthChecker" class="me.andpay.ac.wpn.web.session.WpnSessionAuthChecker"/>
+	
+
+</beans>
